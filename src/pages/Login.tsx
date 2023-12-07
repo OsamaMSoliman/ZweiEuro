@@ -1,18 +1,21 @@
 import StyledFirebaseAuth from "../firebase/StyledFirebaseAuth";
 import { EmailAuthProvider, GoogleAuthProvider, getAuth, signOut } from "firebase/auth";
-import { Button, CircularProgress } from "@mui/material";
-import { Logout } from "@mui/icons-material";
-import { useFirebaseApp, useSigninCheck } from "reactfire";
+import { useEffect } from "react";
+import { Spinner } from "react-bootstrap";
+import { useSigninCheck } from "reactfire";
 
 
-export default function Login() {
-    const fireAuth = getAuth(useFirebaseApp());
-
-    const logOut = () => { signOut(fireAuth); };
-
+export default function Login({ logOut = false }: { logOut?: boolean }) {
+    const fireAuth = getAuth();
     const { status, data: singInResult } = useSigninCheck();
-    console.log(`status=${status}`);
-    console.log(`singInResult=${singInResult}`);
+
+
+    useEffect(() => {
+        console.log("Once", logOut, fireAuth.currentUser);
+        if (logOut)
+            signOut(fireAuth);
+    }, []);
+
 
     // https://github.com/firebase/firebaseui-web#configuration
     const uiConfig: firebaseui.auth.Config = {
@@ -28,12 +31,8 @@ export default function Login() {
         signInSuccessUrl: "/",
     };
     if (status === "loading")
-        return <CircularProgress color="inherit" sx={{ ml: "50%", mt: "25%" }} />;
+        return <Spinner animation="border" variant="primary" />;
 
-    return (<>
-        {singInResult.signedIn ?
-            <Button variant="contained" startIcon={<Logout />} onClick={logOut}>sign out</Button>
-            :
-            <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={fireAuth} />}
-    </>);
+    if (!singInResult?.signedIn)
+        return <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={fireAuth} />
 }

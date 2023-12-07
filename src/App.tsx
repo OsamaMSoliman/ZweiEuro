@@ -5,9 +5,7 @@ import { connectStorageEmulator, getStorage } from "firebase/storage";
 import { connectDatabaseEmulator, getDatabase } from "firebase/database";
 // import { initializeAppCheck, ReCaptchaEnterpriseProvider } from "firebase/app-check";
 // 
-import Header from "./components/Header";
-import MainBody from "./components/MainBody";
-import Footer from "./components/Footer";
+import Routing from "./components/Routing";
 
 
 export default function () {
@@ -27,16 +25,14 @@ export default function () {
   //   provider: new ReCaptchaEnterpriseProvider(/* reCAPTCHA Enterprise "site" key */),
   //   isTokenAutoRefreshEnabled: true // Set to true to allow auto-refresh.
   // });
-
+  
   return (
     <>
-    {/* <AppCheckProvider sdk={appCheck}> */}
+      {/* <AppCheckProvider sdk={appCheck}> */}
       <AuthProvider sdk={fireAuth}>
-        <Header />
-        <MainBody />
+        <Routing />
       </AuthProvider>
-      <Footer />
-    {/* </AppCheckProvider> */}
+      {/* </AppCheckProvider> */}
     </>
   );
 }
