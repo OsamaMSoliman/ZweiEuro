@@ -1,20 +1,22 @@
 import StyledFirebaseAuth from "../firebase/StyledFirebaseAuth";
-import { EmailAuthProvider, GoogleAuthProvider, getAuth, signOut } from "firebase/auth";
+import { EmailAuthProvider, GoogleAuthProvider, getAuth } from "firebase/auth";
 import { useEffect } from "react";
-import { Spinner } from "react-bootstrap";
+import { Container } from "react-bootstrap";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useSigninCheck } from "reactfire";
 
 
-export default function Login({ logOut = false }: { logOut?: boolean }) {
-    const fireAuth = getAuth();
-    const { status, data: singInResult } = useSigninCheck();
-
+export default function Login() {
+    // NOTE: getAuth and useAuth won't trigger useEffect on being updated, as if they don't have listeners in them???
+    // that's why I used useSigninCheck, also useUser would have worked fine!
+    const { data: signInResult } = useSigninCheck();
+    const navigate = useNavigate();
+    const { state } = useLocation();
 
     useEffect(() => {
-        console.log("Once", logOut, fireAuth.currentUser);
-        if (logOut)
-            signOut(fireAuth);
-    }, []);
+        if (signInResult?.signedIn)
+            navigate(state?.from || "/", { replace: true });
+    }, [signInResult]);
 
 
     // https://github.com/firebase/firebaseui-web#configuration
@@ -28,11 +30,20 @@ export default function Login({ logOut = false }: { logOut?: boolean }) {
             },
             GoogleAuthProvider.PROVIDER_ID,
         ],
-        signInSuccessUrl: "/",
+        // // signInSuccessUrl: "/",
+        // callbacks: {
+        //     signInSuccessWithAuthResult(authResult, redirectUrl) {
+        //         console.log(authResult,redirectUrl) ;
+        //         if (authResult.user)
+        //             navigate(state?.from || "/", { replace: true });
+        //         return false;
+        //     },
+        // }
     };
-    if (status === "loading")
-        return <Spinner animation="border" variant="primary" />;
 
-    if (!singInResult?.signedIn)
-        return <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={fireAuth} />
+    return (
+        <Container className="d-flex flex-column justify-content-center h-100">
+            <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={getAuth()} />
+        </Container>
+    );
 }

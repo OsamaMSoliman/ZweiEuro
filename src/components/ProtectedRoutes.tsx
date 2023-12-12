@@ -1,12 +1,13 @@
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { useSigninCheck } from "reactfire";
 
 export default function () {
-    const navigate = useNavigate();
     const { pathname } = useLocation();
-    const { data: singInResult } = useSigninCheck();
+    const { data: signInResult } = useSigninCheck();
 
-    if (!!singInResult?.signedIn || pathname.endsWith("login"))
-        return <Outlet />;
-    navigate("/login");
+    return (
+        signInResult?.signedIn
+            ? <Outlet />
+            : <Navigate to={"/login"} state={{ from: pathname }} replace />
+    );
 }

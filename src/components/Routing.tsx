@@ -12,7 +12,6 @@ export default function () {
             <Routes>
                 <Route element={<AppLayout />}>
                     <Route path="/login" element={<Login />} />
-                    <Route path="/logout" element={<Login logOut />} />
                     <Route path="/" element={<ProtectedRoutes />}>
                         <Route index element={<Home />} />
                         <Route path="/upload" element={<Upload />} />

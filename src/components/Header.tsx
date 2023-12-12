@@ -1,14 +1,14 @@
 import { Button, Container, Nav, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { useAuth, useUser } from "reactfire";
+import { useUser } from "reactfire";
+import { Logout } from "../utils/logout";
 
 export default function () {
-    const fireAuth = useAuth();
-    const { status, data: user } = useUser();
+    const { data: user } = useUser();
 
     return (
-        <header>{
-            <Navbar expand="lg" className="bg-body-tertiary">
+        <header>
+            <Navbar expand="lg" className="bg-body-tertiary" fixed="top">
                 <Container fluid>
                     <Navbar.Brand>Navigation bar</Navbar.Brand>
                     <Navbar.Toggle />
@@ -23,13 +23,15 @@ export default function () {
                         </Nav>
                     </Navbar.Collapse>
                     <Navbar.Collapse className="justify-content-end">
-
                         <Navbar.Text>
-                            Signed in as: <Button variant="outline-dark" onClick={() => fireAuth.signOut()}>{user?.displayName}</Button>
+                            Signed in as:{" "}
+                            <Button variant="outline-dark" onClick={Logout} disabled={!user}>
+                                {user?.displayName}
+                            </Button>
                         </Navbar.Text>
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-        }</header>
+        </header>
     );
 }
