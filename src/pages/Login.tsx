@@ -1,4 +1,4 @@
-import StyledFirebaseAuth from "../firebase/StyledFirebaseAuth";
+import StyledFirebaseAuth from "../firebase/components/StyledFirebaseAuth";
 import { EmailAuthProvider, GoogleAuthProvider, getAuth } from "firebase/auth";
 import { useEffect } from "react";
 import { Container } from "react-bootstrap";

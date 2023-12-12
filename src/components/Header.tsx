@@ -1,7 +1,7 @@
 import { Button, Container, Nav, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useUser } from "reactfire";
-import { Logout } from "../utils/logout";
+import { Logout } from "../firebase/utils/fireLogout";
 
 export default function () {
     const { data: user } = useUser();

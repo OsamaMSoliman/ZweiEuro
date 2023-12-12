@@ -4,14 +4,14 @@ import { Outlet } from "react-router-dom";
 
 export default function () {
     console.log("AppLayout");
-    
+
     return (
-        <>
-            <Header />
-            <main>
+        <div className="d-flex flex-column vh-100">
+            <Header/>
+            <main className="flex-fill" >
                 <Outlet />
             </main>
-            <Footer />
-        </>
+            <Footer/>
+        </div>
     );
 }
