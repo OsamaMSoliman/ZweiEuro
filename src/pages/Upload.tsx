@@ -5,18 +5,9 @@ import { Button, Col, Container, Form, FloatingLabel, InputGroup, Row } from "re
 import { useDatabase, useStorage } from "reactfire";
 import { uploadCoinData } from "../firebase/utils/fireRealTimeDatabase";
 import { uploadCoinImg } from "../firebase/utils/fireStorage";
+import { CoinData } from "../interfaces";
 
 const maxAllowedFileSizeInMB = 0.25;
-
-export interface coinFormData {
-    imgFile: File;
-    year: number;
-    A: number;
-    D: number;
-    F: number;
-    G: number;
-    J: number;
-}
 
 const formatBytes = (bytes: number, decimals = 2): string => {
     if (!+bytes) return '0 Bytes';
@@ -46,21 +37,23 @@ export default function Upload() {
 
     function handleUpload(formData: FormData) {
         // TODO: handle file size !!!
-        const x: coinFormData = {
-            imgFile: formData.get("imgFile") as File,
+        const coinData: CoinData = {
             year: Number(formData.get("year")),
-            A: Number(formData.get("A")),
-            D: Number(formData.get("D")),
-            F: Number(formData.get("F")),
-            G: Number(formData.get("G")),
-            J: Number(formData.get("J")),
+            collection: {
+                A: Number(formData.get("A")),
+                D: Number(formData.get("D")),
+                F: Number(formData.get("F")),
+                G: Number(formData.get("G")),
+                J: Number(formData.get("J")),
+            },
+            description:"", //TODO ?
         };
 
-        const coinId = uploadCoinData(fireDB, x) as string;
-        uploadCoinImg(fireStorgate, coinId, x.imgFile);
-        console.log("uploaded");
-
+        const coinId = uploadCoinData(fireDB, coinData);
+        uploadCoinImg(fireStorgate, coinId, formData.get("imgFile") as File);
+        
         //TODO: snackbar shows up after success and set wasValidated to False and reset the form for new uploads
+        console.log("TODO: uploaded");
     }
 
 
