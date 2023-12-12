@@ -1,7 +1,7 @@
 // https://github.com/FirebaseExtended/reactfire/blob/f768f4d3c3be4ab5a3611143b8ceda19ede1dc95/docs/use.md#cloud-storage-for-firebase
 
 import { useRef, useState } from "react";
-import { Button, Col, Container, Form, InputGroup, Row } from "react-bootstrap";
+import { Button, Col, Container, Form, FloatingLabel, InputGroup, Row } from "react-bootstrap";
 
 const maxAllowedFileSizeInMB = 0.25;
 
@@ -30,6 +30,7 @@ const formatBytes = (bytes: number, decimals = 2): string => {
 
 export default function Upload() {
     const fileInputRef = useRef<HTMLInputElement>(null);
+    const [wasValidated, setWasValidated] = useState(false);
     const [uploadFile, setUploadFile] = useState<File>();
     const didfileExceedMaxSize = uploadFile && uploadFile?.size > 1024 * 1024 * maxAllowedFileSizeInMB;
 
@@ -53,17 +54,27 @@ export default function Upload() {
         console.log("TODO uploading:", x);
     }
 
+    console.log("upload");
+    
+
     return (
         <Container className="d-flex flex-column justify-content-center h-100">
             <h1>Upload images</h1>
-            <Form onSubmit={(e) => {
-                e.preventDefault();
-                handleUpload(new FormData(e.currentTarget));
-            }}
+            <Form
+                noValidate validated={wasValidated}
+                onSubmit={(event) => {
+                    event.preventDefault();
+                    const form = event.currentTarget;;
+                    if (form.checkValidity())
+                        handleUpload(new FormData(form));
+                    setWasValidated(true);
+                }}
             >
                 <Row md={2} xs={1} className="h-100 g-2">
                     <Col className="d-flex flex-column justify-content-center align-items-center">
                         <input
+                            className="d-none"
+                            ref={fileInputRef}
                             type="file"
                             accept="image/*"
                             name="imgFile" required
@@ -71,12 +82,11 @@ export default function Upload() {
                                 // event.target?.files?.[0] == fileInputRef.current?.files?.[0]
                                 setUploadFile(fileInputRef.current?.files?.[0])
                             }
-                            style={{ display: 'none' }}
-                            ref={fileInputRef}
                         />
                         <Button
                             className="rounded-circle p-4"
                             onClick={() => fileInputRef.current?.click()}
+                            variant={wasValidated && !uploadFile ? "danger" : "primary"}
                         >
                             <i className="bi bi-cloud-upload" />
                         </Button>
@@ -100,14 +110,16 @@ export default function Upload() {
                         )}
                     </Col>
                     <Col>
+                        <Form.Floating className="mb-3">
+                            <Form.Control size="lg" name="year" type="number" placeholder="1999" required />
+                            <Form.Label>{t("Year")}: </Form.Label>
+                        </Form.Floating>
                         <Form.Group className="mb-3" >
-                            <Form.Label>Year: </Form.Label>
-                            <Form.Control name="year" type="number" placeholder="1999" required />
-                        </Form.Group>
-                        <Form.Group className="mb-3" >
-                            <Form.Label>Collected coins: </Form.Label>
+                            <Form.Label>{t("Collected coins (default 0)")}: </Form.Label>
                             <InputGroup>
+                                {/* <FloatingLabel className="text-center" label="A"> */}
                                 <Form.Control name="A" className="text-center" type="number" placeholder="A" />
+                                {/* </FloatingLabel> */}
                                 <Form.Control name="D" className="text-center" type="number" placeholder="D" />
                                 <Form.Control name="F" className="text-center" type="number" placeholder="F" />
                                 <Form.Control name="G" className="text-center" type="number" placeholder="G" />
