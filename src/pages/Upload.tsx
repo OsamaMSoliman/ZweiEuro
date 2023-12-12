@@ -2,10 +2,13 @@
 
 import { useRef, useState } from "react";
 import { Button, Col, Container, Form, FloatingLabel, InputGroup, Row } from "react-bootstrap";
+import { useDatabase, useStorage } from "reactfire";
+import { uploadCoinData } from "../firebase/utils/fireRealTimeDatabase";
+import { uploadCoinImg } from "../firebase/utils/fireStorage";
 
 const maxAllowedFileSizeInMB = 0.25;
 
-interface coinFormData {
+export interface coinFormData {
     imgFile: File;
     year: number;
     A: number;
@@ -38,8 +41,11 @@ export default function Upload() {
     function t(text: string): string {
         return text;
     }
+    const fireDB = useDatabase();
+    const fireStorgate = useStorage();
 
     function handleUpload(formData: FormData) {
+        // TODO: handle file size !!!
         const x: coinFormData = {
             imgFile: formData.get("imgFile") as File,
             year: Number(formData.get("year")),
@@ -50,12 +56,13 @@ export default function Upload() {
             J: Number(formData.get("J")),
         };
 
-        // TODO: upload to firebase
-        console.log("TODO uploading:", x);
+        const coinId = uploadCoinData(fireDB, x) as string;
+        uploadCoinImg(fireStorgate, coinId, x.imgFile);
+        console.log("uploaded");
+
+        //TODO: snackbar shows up after success and set wasValidated to False and reset the form for new uploads
     }
 
-    console.log("upload");
-    
 
     return (
         <Container className="d-flex flex-column justify-content-center h-100">
