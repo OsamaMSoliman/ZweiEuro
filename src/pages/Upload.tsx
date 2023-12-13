@@ -1,7 +1,7 @@
 // https://github.com/FirebaseExtended/reactfire/blob/f768f4d3c3be4ab5a3611143b8ceda19ede1dc95/docs/use.md#cloud-storage-for-firebase
 
 import { useRef, useState } from "react";
-import { Button, Col, Container, Form, FloatingLabel, InputGroup, Row } from "react-bootstrap";
+import { Button, Col, Container, Form, FloatingLabel, InputGroup, Row, Badge } from "react-bootstrap";
 import { useDatabase, useStorage } from "reactfire";
 import { uploadCoinData } from "../firebase/utils/fireRealTimeDatabase";
 import { uploadCoinImg } from "../firebase/utils/fireStorage";
@@ -26,6 +26,7 @@ const formatBytes = (bytes: number, decimals = 2): string => {
 export default function Upload() {
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [wasValidated, setWasValidated] = useState(false);
+    const [uploadCount, setUploadCount] = useState<number>(0);
     const [uploadFile, setUploadFile] = useState<File>();
     const didfileExceedMaxSize = uploadFile && uploadFile?.size > 1024 * 1024 * maxAllowedFileSizeInMB;
 
@@ -33,8 +34,7 @@ export default function Upload() {
     const fireDB = useDatabase();
     const fireStorgate = useStorage();
 
-    function handleUpload(formData: FormData) {
-        // TODO: handle file size !!!
+    function handleUpload(formData: FormData, OnSuccessCallback: Function) {
         const coinData: CoinData = {
             year: Number(formData.get("year")),
             collection: {
@@ -50,22 +50,29 @@ export default function Upload() {
         const coinId = uploadCoinData(fireDB, coinData);
         uploadCoinImg(fireStorgate, coinId, formData.get("imgFile") as File);
 
-        //TODO: snackbar shows up after success and set wasValidated to False and reset the form for new uploads
-        console.log("TODO: uploaded");
+        OnSuccessCallback();
     }
 
 
     return (
         <Container className="d-flex flex-column justify-content-center h-100">
-            <h1>{t("upload_title")}</h1>
+            <div className="d-flex align-items-start">
+                <h1>{t("upload_title")} </h1>
+                {uploadCount > 0 && <Badge pill bg="success">{uploadCount}</Badge>}
+            </div>
             <Form
                 noValidate validated={wasValidated}
                 onSubmit={(event) => {
                     event.preventDefault();
-                    const form = event.currentTarget;;
-                    if (form.checkValidity())
-                        handleUpload(new FormData(form));
                     setWasValidated(true);
+                    const form = event.currentTarget;;
+                    if (form.checkValidity() && !didfileExceedMaxSize)
+                        handleUpload(new FormData(form), () => {
+                            setUploadCount(prev_value => prev_value + 1);
+                            setWasValidated(false);
+                            setUploadFile(undefined);
+                            form.reset();
+                        });
                 }}
             >
                 <Row md={2} xs={1} className="h-100 g-2">
@@ -84,7 +91,7 @@ export default function Upload() {
                         <Button
                             className="rounded-circle p-4"
                             onClick={() => fileInputRef.current?.click()}
-                            variant={wasValidated && !uploadFile ? "danger" : "primary"}
+                            variant={wasValidated && (!uploadFile || didfileExceedMaxSize) ? "danger" : "primary"}
                         >
                             <i className="bi bi-cloud-upload" />
                         </Button>
