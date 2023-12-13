@@ -6,6 +6,7 @@ import { useDatabase, useStorage } from "reactfire";
 import { uploadCoinData } from "../firebase/utils/fireRealTimeDatabase";
 import { uploadCoinImg } from "../firebase/utils/fireStorage";
 import { CoinData } from "../interfaces";
+import { useTranslation } from "react-i18next";
 
 const maxAllowedFileSizeInMB = 0.25;
 
@@ -28,10 +29,7 @@ export default function Upload() {
     const [uploadFile, setUploadFile] = useState<File>();
     const didfileExceedMaxSize = uploadFile && uploadFile?.size > 1024 * 1024 * maxAllowedFileSizeInMB;
 
-    // TODO: translation function
-    function t(text: string): string {
-        return text;
-    }
+    const [t] = useTranslation();
     const fireDB = useDatabase();
     const fireStorgate = useStorage();
 
@@ -46,12 +44,12 @@ export default function Upload() {
                 G: Number(formData.get("G")),
                 J: Number(formData.get("J")),
             },
-            description:"", //TODO ?
+            description: "", //TODO ?
         };
 
         const coinId = uploadCoinData(fireDB, coinData);
         uploadCoinImg(fireStorgate, coinId, formData.get("imgFile") as File);
-        
+
         //TODO: snackbar shows up after success and set wasValidated to False and reset the form for new uploads
         console.log("TODO: uploaded");
     }
@@ -59,7 +57,7 @@ export default function Upload() {
 
     return (
         <Container className="d-flex flex-column justify-content-center h-100">
-            <h1>Upload images</h1>
+            <h1>{t("upload_title")}</h1>
             <Form
                 noValidate validated={wasValidated}
                 onSubmit={(event) => {
