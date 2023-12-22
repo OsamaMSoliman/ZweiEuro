@@ -1,3 +1,19 @@
 {
-    "upload_title":"Bilder und Münzdaten hochladen"
+    "upload-page": {
+        "title": "Bilder und Münzdaten hochladen",
+        "file-size-warning": "Warnung! Dateigröße hat das Limit überschritten",
+        "max-allow-size": "Max. erlaubte Größe",
+        "file-name": "Dateiname",
+        "file-size": "Dateigröße",
+        "year": "Jahr",
+        "collected-coins-with-default": "Gesammelte Münzen (Voreinstellung 0)",
+        "submit-btn": "Abgeben"
+    },
+    "slideshow-page": {},
+    "app-nav-bar": {
+        "title":"2 €",
+        "home-link":"Startseite",
+        "upload-link":"Hochladen",
+        "sign-in-label":"Angemeldet als"
+    }
 }

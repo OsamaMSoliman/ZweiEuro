@@ -1,3 +1,19 @@
 {
-    "upload_title":"Upload images and coin data"
+    "upload-page": {
+        "title": "Upload images and coin data",
+        "file-size-warning": "Warning! file size exceeded the limit",
+        "max-allow-size": "Max allowed size",
+        "file-name": "File name",
+        "file-size": "File Size",
+        "year": "Year",
+        "collected-coins-with-default": "Collected coins (default 0)",
+        "submit-btn": "Submit"
+    },
+    "slideshow-page": {},
+    "app-nav-bar": {
+        "title":"2 €",
+        "home-link":"Home",
+        "upload-link":"Upload",
+        "sign-in-label":"Signed in as"
+    }
 }

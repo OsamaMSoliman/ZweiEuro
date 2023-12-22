@@ -8,7 +8,7 @@ i18next
     .use(LanguageDetector)
     .use(initReactI18next)
     .init({
-        // lng:"de", // Language to use (overrides language detection)
+        // lng: "de", // Language to use (overrides language detection)
         interpolation: { escapeValue: false },
         fallbackLng: 'de',
         debug: true,
@@ -20,6 +20,7 @@ i18next
                 translation: de,
             },
         },
+        // ns: list of keys, of the files maybe ???
     });
 
 

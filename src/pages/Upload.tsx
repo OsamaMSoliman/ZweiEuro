@@ -7,8 +7,9 @@ import { uploadCoinData } from "../firebase/utils/fireRealTimeDatabase";
 import { uploadCoinImg } from "../firebase/utils/fireStorage";
 import { CoinData } from "../interfaces";
 import { useTranslation } from "react-i18next";
+import { getAuth } from "firebase/auth";
 
-const maxAllowedFileSizeInMB = 0.25;
+const maxAllowedFileSizeInMB = 0.5;
 
 const formatBytes = (bytes: number, decimals = 2): string => {
     if (!+bytes) return '0 Bytes';
@@ -44,7 +45,7 @@ export default function Upload() {
                 G: Number(formData.get("G")),
                 J: Number(formData.get("J")),
             },
-            description: "", //TODO ?
+            description: getAuth().currentUser?.displayName ?? "", //TODO ?
         };
 
         const coinId = uploadCoinData(fireDB, coinData);
@@ -57,7 +58,7 @@ export default function Upload() {
     return (
         <Container className="d-flex flex-column justify-content-center h-100">
             <div className="d-flex align-items-start">
-                <h1>{t("upload_title")} </h1>
+                <h1>{t("upload-page.title")} </h1>
                 {uploadCount > 0 && <Badge pill bg="success">{uploadCount}</Badge>}
             </div>
             <Form
@@ -97,19 +98,19 @@ export default function Upload() {
                         </Button>
                         {didfileExceedMaxSize && (
                             <div>
-                                <i className="bi bi-exclamation-triangle text-danger">{t('file-size-warning')}</i>
+                                <i className="bi bi-exclamation-triangle text-danger">{t('upload-page.file-size-warning')}</i>
                             </div>
                         )}
                         <div>
-                            {t('max allow size')}: {maxAllowedFileSizeInMB} MB
+                            {t('upload-page.max-allow-size')}: {maxAllowedFileSizeInMB} MB
                         </div>
                         {uploadFile && (
                             <>
                                 <div>
-                                    {t('File Name')}: {uploadFile?.name}
+                                    {t('upload-page.file-name')}: {uploadFile?.name}
                                 </div>
                                 <div>
-                                    {t('File Size')}: {formatBytes(uploadFile?.size)}
+                                    {t('upload-page.file-size')}: {formatBytes(uploadFile?.size)}
                                 </div>
                             </>
                         )}
@@ -117,10 +118,10 @@ export default function Upload() {
                     <Col>
                         <Form.Floating className="mb-3">
                             <Form.Control size="lg" name="year" type="number" placeholder="1999" required />
-                            <Form.Label>{t("Year")}: </Form.Label>
+                            <Form.Label>{t("upload-page.year")}: </Form.Label>
                         </Form.Floating>
                         <Form.Group className="mb-3" >
-                            <Form.Label>{t("Collected coins (default 0)")}: </Form.Label>
+                            <Form.Label>{t("upload-page.collected-coins-with-default")}: </Form.Label>
                             <InputGroup>
                                 {/* <FloatingLabel className="text-center" label="A"> */}
                                 <Form.Control name="A" className="text-center" type="number" placeholder="A" />
@@ -135,7 +136,7 @@ export default function Upload() {
                 </Row>
                 <Row>
                     <Button variant="primary" type="submit">
-                        Submit
+                        {t("upload-page.submit-btn")}
                     </Button>
                 </Row>
             </Form>

@@ -7,7 +7,7 @@ import { LetterCard } from './LetterCard';
 import { CoinData, CoinLetterType } from '../interfaces';
 
 export const SlideSheet: React.FC<CoinData> = ({ id, year, description, img_id, collection }) => {
-    const { status, data: img_uri } = useStorageDownloadURL(getImgStorageRef(useStorage(), img_id));
+    const { status, data: img_uri } = useStorageDownloadURL(getImgStorageRef(useStorage(), img_id!));
     console.log("SlideSheet", status, img_uri);
     return (
         <>

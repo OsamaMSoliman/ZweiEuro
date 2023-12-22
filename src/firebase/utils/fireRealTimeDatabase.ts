@@ -1,15 +1,20 @@
 import { push, set, DatabaseReference, ref, Database, increment } from 'firebase/database';
 import { CoinData, CoinLetterType } from '../../interfaces';
+import { getAuth } from 'firebase/auth';
 
-// TODO: last modified by which {user}
+// TODO: firebase hosting
 
 const crement = (dbRef: DatabaseReference, amount: 1 | -1) => set(dbRef, increment(amount));
 
 export function in_crement(db: Database, coinId: string, letter: CoinLetterType) {
     crement(ref(db, `coins/${coinId}/collection/${letter}`), 1);
+    if (getAuth().currentUser?.displayName)
+        set(ref(db, `coins/${coinId}/description`), getAuth().currentUser?.displayName);
 }
 export function de_crement(db: Database, coinId: string, letter: CoinLetterType) {
     crement(ref(db, `coins/${coinId}/collection/${letter}`), -1);
+    if (getAuth().currentUser?.displayName)
+        set(ref(db, `coins/${coinId}/description`), getAuth().currentUser?.displayName);
 }
 
 
