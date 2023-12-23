@@ -4,21 +4,27 @@ import { CardGroup } from 'react-bootstrap';
 import { useStorage, useStorageDownloadURL } from 'reactfire';
 import { getImgStorageRef } from '../firebase/utils/fireStorage';
 import { LetterCard } from './LetterCard';
-import { CoinData, CoinLetterType } from '../interfaces';
+import { CoinCategorys, CoinData, CoinLetterType } from '../interfaces';
 
-export const SlideSheet: React.FC<CoinData> = ({ year, description, img_id, collection }) => {
-    const { data: img_uri } = useStorageDownloadURL(getImgStorageRef(useStorage(), img_id!));
+export const SlideSheet: React.FC<CoinData> = ({ id, title, description, year, collection, category, modifiedBy }) => {
+    const { data: img_uri } = useStorageDownloadURL(getImgStorageRef(useStorage(), id!));
 
     return (
         <>
             <Image src={img_uri} alt="image here" className='w-100 vh-100' style={{ objectFit: "cover" }} />
             <CarouselCaption>
-                <h1>{year}</h1>
+                <h1>{title} - {year}</h1>
                 <h3>{description}</h3>
+                <h4>{CoinCategorys[category]}</h4>
+                <h4>{modifiedBy}</h4>
                 <CardGroup>
-                    {Object.entries(collection).map((value, idx) => (
-                        <LetterCard key={idx} coinId={img_id!} letter={value[0] as CoinLetterType} count={value[1]} />
-                    ))}
+                    {"number" === typeof collection ?
+                        <LetterCard coinId={id!} letter={"count" as CoinLetterType} count={collection} />
+                        :
+                        Object.entries(collection).map(([key, value]) => (
+                            <LetterCard key={key} coinId={id!} letter={key as CoinLetterType} count={value} />
+                        ))
+                    }
                 </CardGroup>
             </CarouselCaption>
         </>
