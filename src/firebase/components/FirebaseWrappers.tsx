@@ -1,6 +1,9 @@
 import { ReactNode } from "react";
 //
-import { AppCheckProvider, AuthProvider, DatabaseProvider, StorageProvider, useFirebaseApp } from "reactfire";
+import {
+    // AppCheckProvider,
+    AuthProvider, DatabaseProvider, StorageProvider, useFirebaseApp
+} from "reactfire";
 // 
 import { connectAuthEmulator, getAuth } from "firebase/auth";
 import { connectStorageEmulator, getStorage } from "firebase/storage";
@@ -15,8 +18,13 @@ export default function ({ children }: { children: ReactNode }) {
     const fireRealtimeDB = getDatabase(firebaseApp);
     const fireStorage = getStorage(firebaseApp);
 
-    // if (location.hostname === "localhost") {
-    if (process.env.NODE_ENV !== 'production') {
+    console.log(location.hostname, process.env.NODE_ENV);
+
+    if (
+        location.hostname === "localhost" ||
+        location.hostname === "127.0.0.1" ||
+        process.env.NODE_ENV !== 'production'
+    ) {
         // Set up emulators
         connectAuthEmulator(fireAuth, 'http://localhost:9099');
         connectDatabaseEmulator(fireRealtimeDB, 'localhost', 9000);
