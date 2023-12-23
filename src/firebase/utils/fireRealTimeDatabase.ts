@@ -9,12 +9,12 @@ const crement = (dbRef: DatabaseReference, amount: 1 | -1) => set(dbRef, increme
 export function in_crement(db: Database, coinId: string, letter: CoinLetterType) {
     crement(ref(db, `coins/${coinId}/collection/${letter}`), 1);
     if (getAuth().currentUser?.displayName)
-        set(ref(db, `coins/${coinId}/description`), getAuth().currentUser?.displayName);
+        set(ref(db, `coins/${coinId}/modifiedBy`), getAuth().currentUser?.displayName);
 }
 export function de_crement(db: Database, coinId: string, letter: CoinLetterType) {
     crement(ref(db, `coins/${coinId}/collection/${letter}`), -1);
     if (getAuth().currentUser?.displayName)
-        set(ref(db, `coins/${coinId}/description`), getAuth().currentUser?.displayName);
+        set(ref(db, `coins/${coinId}/modifiedBy`), getAuth().currentUser?.displayName);
 }
 
 
@@ -23,7 +23,7 @@ export const getBaseDBUploadRef = (db: Database) => ref(db, "coins");
 export function uploadCoinData(db: Database, newCoinData: CoinData) {
     const pushRef = push(getBaseDBUploadRef(db));
     const imgId = pushRef.key as string;
-    newCoinData.img_id = imgId;
+    newCoinData.id = imgId;
     set(pushRef, newCoinData).catch((error) => console.log(error));
     return imgId;
 }
