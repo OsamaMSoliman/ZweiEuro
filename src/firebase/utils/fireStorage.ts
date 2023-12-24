@@ -3,9 +3,10 @@ import {
     // StorageReference, getDownloadURL 
 } from 'firebase/storage';
 
+const baseFolder = "coinImgsDir";
 
 export function getImgStorageRef(storage: FirebaseStorage, refKey: string) {
-    return ref(storage, `/coins/${refKey}`);
+    return ref(storage, `/${baseFolder}/${refKey}`);
 }
 
 export function uploadCoinImg(storage: FirebaseStorage, refKey: string, imgFile: File) {
