@@ -1,14 +1,11 @@
 import { ReactNode } from "react";
 //
-import {
-    // AppCheckProvider,
-    AuthProvider, DatabaseProvider, StorageProvider, useFirebaseApp
-} from "reactfire";
+import { AppCheckProvider, AuthProvider, DatabaseProvider, StorageProvider, useFirebaseApp } from "reactfire";
 // 
 import { connectAuthEmulator, getAuth } from "firebase/auth";
 import { connectStorageEmulator, getStorage } from "firebase/storage";
 import { connectDatabaseEmulator, getDatabase } from "firebase/database";
-// import { initializeAppCheck, ReCaptchaEnterpriseProvider } from "firebase/app-check";
+import { initializeAppCheck, ReCaptchaEnterpriseProvider } from "firebase/app-check";
 
 
 
@@ -31,22 +28,22 @@ export default function ({ children }: { children: ReactNode }) {
         connectStorageEmulator(fireStorage, 'localhost', 9199);
     }
 
-    // // https://firebase.google.com/docs/app-check/web/recaptcha-provider#project-setup
-    // const appCheck = initializeAppCheck(firebaseApp, {
-    //   provider: new ReCaptchaEnterpriseProvider(/* reCAPTCHA Enterprise "site" key */),
-    //   isTokenAutoRefreshEnabled: true // Set to true to allow auto-refresh.
-    // });
+    // https://firebase.google.com/docs/app-check/web/recaptcha-provider#project-setup
+    const appCheck = initializeAppCheck(firebaseApp, {
+        provider: new ReCaptchaEnterpriseProvider("6LfzLjspAAAAABsg-LzxoWH5F5b24An0uToS5CVE"),
+        isTokenAutoRefreshEnabled: true // Set to true to allow auto-refresh.
+    });
 
 
     return (
-        // <AppCheckProvider sdk={appCheck}>
-        <AuthProvider sdk={fireAuth} >
-            <StorageProvider sdk={fireStorage}>
-                <DatabaseProvider sdk={fireRealtimeDB}>
-                    {children}
-                </DatabaseProvider>
-            </StorageProvider>
-        </AuthProvider >
-        // </AppCheckProvider>
+        <AppCheckProvider sdk={appCheck}>
+            <AuthProvider sdk={fireAuth} >
+                <StorageProvider sdk={fireStorage}>
+                    <DatabaseProvider sdk={fireRealtimeDB}>
+                        {children}
+                    </DatabaseProvider>
+                </StorageProvider>
+            </AuthProvider >
+        </AppCheckProvider>
     );
 }
