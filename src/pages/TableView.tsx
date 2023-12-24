@@ -24,13 +24,13 @@ export default function TableView() {
         <Table bordered className='text-center'>
             <thead>
                 <tr>
-                    <th rowSpan={2} className='align-middle'>{t("id")}</th>
-                    <th rowSpan={2} className='align-middle'>{t("title")}</th>
-                    <th rowSpan={2} className='align-middle'>{t("description")}</th>
-                    <th rowSpan={2} className='align-middle'>{t("year")}</th>
-                    <th colSpan={5} className='text-center' >{t("collection")}</th>
-                    <th rowSpan={2} className='align-middle'>{t("category")}</th>
-                    <th rowSpan={2} className='align-middle'>{t("modifiedBy")}</th>
+                    <th rowSpan={2} className='align-middle'>{t("table-view.id")}</th>
+                    <th rowSpan={2} className='align-middle'>{t("table-view.title")}</th>
+                    <th rowSpan={2} className='align-middle'>{t("table-view.description")}</th>
+                    <th rowSpan={2} className='align-middle'>{t("table-view.year")}</th>
+                    <th colSpan={5} className='text-center' >{t("table-view.collection")}</th>
+                    <th rowSpan={2} className='align-middle'>{t("table-view.category")}</th>
+                    <th rowSpan={2} className='align-middle'>{t("table-view.modifiedBy")}</th>
                 </tr>
                 <tr>
                     <th>A</th>
