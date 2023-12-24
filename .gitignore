@@ -1,6 +1,6 @@
 *.env
 *.rules
-.firebase/*
+# .firebase/*
 
 # Logs
 logs
