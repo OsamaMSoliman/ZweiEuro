@@ -1,8 +1,9 @@
-import { Button, Container, Nav, Navbar } from "react-bootstrap";
+import { Button, Container, Image, Nav, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useUser } from "reactfire";
 import { Logout } from "../firebase/utils/fireLogout";
 import { useTranslation } from "react-i18next";
+import logo from "../assets/logo.jpg";
 
 export default function () {
     const { data: user } = useUser();
@@ -12,12 +13,21 @@ export default function () {
         <header>
             <Navbar expand="lg" className="bg-body-tertiary" fixed="top">
                 <Container fluid>
-                    <Navbar.Brand><h1>{t("app-nav-bar.title")}</h1></Navbar.Brand>
+                    <Navbar.Brand>
+                        <Link to="/">
+                            <Image src={logo} roundedCircle
+                                width="50" height="50"
+                                alt={t("app-nav-bar.title")} />
+                        </Link>
+                    </Navbar.Brand>
                     <Navbar.Toggle />
                     <Navbar.Collapse>
                         <Nav variant="underline" defaultActiveKey="/">
                             <Nav.Item>
                                 <Link className="nav-link" to="/">{t("app-nav-bar.home-link")}</Link>
+                            </Nav.Item>
+                            <Nav.Item>
+                                <Link className="nav-link" to="/table">{t("app-nav-bar.table-link")}</Link>
                             </Nav.Item>
                             <Nav.Item>
                                 <Link className="nav-link" to="/upload">{t("app-nav-bar.upload-link")}</Link>
