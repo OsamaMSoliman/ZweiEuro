@@ -5,15 +5,29 @@
         "max-allow-size": "Max. erlaubte Größe",
         "file-name": "Dateiname",
         "file-size": "Dateigröße",
+        "coin-category": "Kategorie",
+        "coin-title": "Name oder Titel",
         "year": "Jahr",
         "collected-coins-with-default": "Gesammelte Münzen (Voreinstellung 0)",
+        "count": "allgemeine Zählung",
+        "coin-description": "Beschreibung",
         "submit-btn": "Abgeben"
     },
     "slideshow-page": {},
     "app-nav-bar": {
-        "title":"2 €",
-        "home-link":"Startseite",
-        "upload-link":"Hochladen",
-        "sign-in-label":"Angemeldet als"
+        "title": "2 €",
+        "home-link": "Startseite",
+        "table-link": "Tabelle",
+        "upload-link": "Hochladen",
+        "sign-in-label": "Angemeldet als"
+    },
+    "table-view": {
+        "id": "ID",
+        "title": "Titel",
+        "description": "Beschreibung",
+        "year": "Jahr",
+        "collection": "Sammlung",
+        "category": "Kategorie",
+        "modifiedBy": "geändert von"
     }
 }

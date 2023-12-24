@@ -3,8 +3,10 @@ import { getBaseDBUploadRef } from '../firebase/utils/fireRealTimeDatabase';
 import { CoinCategorys, CoinData } from '../interfaces';
 import { Navigate } from 'react-router-dom';
 import { Table } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 
 export default function TableView() {
+    const [t] = useTranslation();
     const baseUploadRef = getBaseDBUploadRef(useDatabase());
     const { data, status, error } = useDatabaseObjectData<{ [key: string]: CoinData }>(baseUploadRef);
 
@@ -22,13 +24,13 @@ export default function TableView() {
         <Table bordered className='text-center'>
             <thead>
                 <tr>
-                    <th rowSpan={2} className='align-middle'>id</th>
-                    <th rowSpan={2} className='align-middle'>title</th>
-                    <th rowSpan={2} className='align-middle'>description</th>
-                    <th rowSpan={2} className='align-middle'>year</th>
-                    <th colSpan={5} className='text-center'>collection</th>
-                    <th rowSpan={2} className='align-middle'>category</th>
-                    <th rowSpan={2} className='align-middle'>modifiedBy</th>
+                    <th rowSpan={2} className='align-middle'>{t("id")}</th>
+                    <th rowSpan={2} className='align-middle'>{t("title")}</th>
+                    <th rowSpan={2} className='align-middle'>{t("description")}</th>
+                    <th rowSpan={2} className='align-middle'>{t("year")}</th>
+                    <th colSpan={5} className='text-center' >{t("collection")}</th>
+                    <th rowSpan={2} className='align-middle'>{t("category")}</th>
+                    <th rowSpan={2} className='align-middle'>{t("modifiedBy")}</th>
                 </tr>
                 <tr>
                     <th>A</th>
