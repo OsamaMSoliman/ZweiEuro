@@ -5,15 +5,29 @@
         "max-allow-size": "Max allowed size",
         "file-name": "File name",
         "file-size": "File Size",
+        "coin-category": "Category",
+        "coin-title": "Name or Title",
         "year": "Year",
         "collected-coins-with-default": "Collected coins (default 0)",
+        "count": "general count",
+        "coin-description": "Description",
         "submit-btn": "Submit"
     },
     "slideshow-page": {},
     "app-nav-bar": {
-        "title":"2 €",
-        "home-link":"Home",
-        "upload-link":"Upload",
-        "sign-in-label":"Signed in as"
+        "title": "2 €",
+        "home-link": "Home",
+        "table-link": "Table",
+        "upload-link": "Upload",
+        "sign-in-label": "Signed in as"
+    },
+    "table-view": {
+        "id": "ID",
+        "title": "Title",
+        "description": "Description",
+        "year": "Year",
+        "collection": "Collection",
+        "category": "Category",
+        "modifiedBy": "Modified By"
     }
 }
