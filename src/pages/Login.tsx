@@ -1,9 +1,5 @@
 import StyledFirebaseAuth from "../firebase/components/StyledFirebaseAuth";
-import {
-    EmailAuthProvider, GoogleAuthProvider,
-    // PhoneAuthProvider,
-    getAuth
-} from "firebase/auth";
+import { EmailAuthProvider, GoogleAuthProvider, getAuth } from "firebase/auth";
 import { useEffect } from "react";
 import { Container } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -33,17 +29,7 @@ export default function Login() {
                 signInMethod: EmailAuthProvider.EMAIL_LINK_SIGN_IN_METHOD,
             },
             GoogleAuthProvider.PROVIDER_ID,
-            // PhoneAuthProvider.PROVIDER_ID,
         ],
-        // // signInSuccessUrl: "/",
-        // callbacks: {
-        //     signInSuccessWithAuthResult(authResult, redirectUrl) {
-        //         console.log(authResult,redirectUrl) ;
-        //         if (authResult.user)
-        //             navigate(state?.from || "/", { replace: true });
-        //         return false;
-        //     },
-        // }
     };
 
     return (
