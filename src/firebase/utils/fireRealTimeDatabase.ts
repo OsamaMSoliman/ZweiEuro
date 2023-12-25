@@ -7,12 +7,12 @@ const baseFolder = "coinsDB";
 const crement = (dbRef: DatabaseReference, amount: 1 | -1) => set(dbRef, increment(amount));
 
 export function in_crement(db: Database, coinId: string, letter: CoinLetterType) {
-    crement(ref(db, `${baseFolder}/${coinId}/collection/${letter === "count" ? "" : letter}`), 1);
+    crement(ref(db, `${baseFolder}/${coinId}/collection/${letter === "#" ? "" : letter}`), 1);
     if (getAuth().currentUser?.displayName)
         set(ref(db, `${baseFolder}/${coinId}/modifiedBy`), getAuth().currentUser?.displayName);
 }
 export function de_crement(db: Database, coinId: string, letter: CoinLetterType) {
-    crement(ref(db, `${baseFolder}/${coinId}/collection/${letter === "count" ? "" : letter}`), -1);
+    crement(ref(db, `${baseFolder}/${coinId}/collection/${letter === "#" ? "" : letter}`), -1);
     if (getAuth().currentUser?.displayName)
         set(ref(db, `${baseFolder}/${coinId}/modifiedBy`), getAuth().currentUser?.displayName);
 }
