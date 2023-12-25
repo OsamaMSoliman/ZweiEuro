@@ -30,6 +30,9 @@ export default function () {
                                 <Link className="nav-link" to="/table">{t("app-nav-bar.table-link")}</Link>
                             </Nav.Item>
                             <Nav.Item>
+                                <Link className="nav-link" to="/grid">{t("app-nav-bar.grid-link")}</Link>
+                            </Nav.Item>
+                            <Nav.Item>
                                 <Link className="nav-link" to="/upload">{t("app-nav-bar.upload-link")}</Link>
                             </Nav.Item>
                         </Nav>
