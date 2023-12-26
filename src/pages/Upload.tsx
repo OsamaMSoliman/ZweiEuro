@@ -5,7 +5,7 @@ import { Button, Col, Container, Form, InputGroup, Row, Badge, FloatingLabel } f
 import { useDatabase, useStorage } from "reactfire";
 import { uploadCoinData } from "../firebase/utils/fireRealTimeDatabase";
 import { uploadCoinImg } from "../firebase/utils/fireStorage";
-import { CoinCategoryType, CoinCategorys, CoinData } from "../interfaces";
+import { TCategory, CoinCategorys, ICoinData } from "../interfaces";
 import { useTranslation } from "react-i18next";
 import { getAuth } from "firebase/auth";
 
@@ -37,22 +37,25 @@ export default function Upload() {
     const fireStorgate = useStorage();
 
     function onSelectChange(event: ChangeEvent<HTMLSelectElement>) {
-        setIsNotDeCoin(event.target.value === "Anderes" as CoinCategoryType);
+        setIsNotDeCoin(event.target.value === "Anderes" satisfies TCategory);
     }
 
     function handleUpload(formData: FormData, OnSuccessCallback: Function) {
-        const coinData: CoinData = {
+        const coinData: ICoinData = {
             title: formData.get("title") as string,
             description: String(formData.get("description") ?? ""),
             year: Number(formData.get("year")),
-            collection: isNotDeCoin ? Number(formData.get("count")) : {
-                A: Number(formData.get("A")),
-                D: Number(formData.get("D")),
-                F: Number(formData.get("F")),
-                G: Number(formData.get("G")),
-                J: Number(formData.get("J")),
-            },
-            category: formData.get("category") as CoinCategoryType,
+            collection: isNotDeCoin ?
+                {
+                    "#": Number(formData.get("count"))
+                } : {
+                    A: Number(formData.get("A")),
+                    D: Number(formData.get("D")),
+                    F: Number(formData.get("F")),
+                    G: Number(formData.get("G")),
+                    J: Number(formData.get("J")),
+                },
+            category: formData.get("category") as TCategory,
             modifiedBy: getAuth().currentUser?.displayName ?? ""
         };
 
@@ -142,7 +145,7 @@ export default function Upload() {
                         <Form.Group className="mb-3" >
                             <Form.Label>{t("upload-page.collected-coins-with-default")}: </Form.Label>
                             {isNotDeCoin ?
-                                <Form.Control name="count" className="text-center" type="number" placeholder={t("upload-page.count")}/>
+                                <Form.Control name="count" className="text-center" type="number" placeholder={t("upload-page.count")} />
                                 :
                                 <InputGroup>
                                     <Form.Control name="A" className="text-center" type="number" placeholder="A" />

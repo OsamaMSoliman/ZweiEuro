@@ -2,10 +2,10 @@ import CarouselCaption from 'react-bootstrap/CarouselCaption';
 import Image from 'react-bootstrap/Image';
 import { useStorage, useStorageDownloadURL } from 'reactfire';
 import { getImgStorageRef } from '../firebase/utils/fireStorage';
-import { CoinCategorys, CoinData } from '../interfaces';
-import LettersCardGroup from './LettersCardGroup';
+import { CoinCategorys, ICoinData } from '../interfaces';
+import { LettersCardGroup } from './LettersCardGroup';
 
-export const SlideSheet: React.FC<CoinData> = ({ id, title, description, year, collection, category, modifiedBy }) => {
+export const SlideSheet: React.FC<ICoinData> = ({ id, title, description, year, collection, category, modifiedBy }) => {
     const { data: img_uri } = useStorageDownloadURL(getImgStorageRef(useStorage(), id!));
 
     return (
