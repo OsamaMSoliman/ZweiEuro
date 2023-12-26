@@ -3,11 +3,10 @@ import { Button, ButtonGroup, Collapse } from 'react-bootstrap';
 import { useState } from 'react';
 import { useDatabase } from 'reactfire';
 import { de_crement, in_crement } from '../firebase/utils/fireRealTimeDatabase';
-import { CoinLetterType } from '../interfaces';
 
 interface ILetterCard {
     coinId: string;
-    letter: CoinLetterType;
+    letter: string;
     count: number;
 }
 

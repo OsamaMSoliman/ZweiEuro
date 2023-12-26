@@ -3,7 +3,7 @@ import CarouselItem from 'react-bootstrap/CarouselItem';
 import { useDatabase, useDatabaseObjectData } from 'reactfire';
 import { getBaseDBUploadRef } from '../firebase/utils/fireRealTimeDatabase';
 import { SlideSheet } from '../components/SlideSheet';
-import { CoinData } from '../interfaces';
+import { ICoinData } from '../interfaces';
 import { Navigate } from 'react-router-dom';
 
 export default function SlideShow() {
@@ -14,7 +14,7 @@ export default function SlideShow() {
   //https://github.com/FirebaseExtended/reactfire/issues/531
   //https://github.com/FirebaseExtended/reactfire/discussions/497
   // So I use instead : useDatabaseObjectData (no need for placeholders anymore)
-  const { data, status, error } = useDatabaseObjectData<{ [key: string]: CoinData }>(baseUploadRef);
+  const { data, status, error } = useDatabaseObjectData<{ [key: string]: ICoinData }>(baseUploadRef);
 
   if (status === "error")
     console.log(error);

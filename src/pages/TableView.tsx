@@ -1,6 +1,6 @@
 import { useDatabase, useDatabaseObjectData } from 'reactfire';
 import { getBaseDBUploadRef } from '../firebase/utils/fireRealTimeDatabase';
-import { CoinCategorys, CoinData } from '../interfaces';
+import { CoinCategorys, ICoinData } from '../interfaces';
 import { Navigate } from 'react-router-dom';
 import { Table } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 export default function TableView() {
     const [t] = useTranslation();
     const baseUploadRef = getBaseDBUploadRef(useDatabase());
-    const { data, status, error } = useDatabaseObjectData<{ [key: string]: CoinData }>(baseUploadRef);
+    const { data, status, error } = useDatabaseObjectData<{ [key: string]: ICoinData }>(baseUploadRef);
 
     if (status === "error")
         console.log(error);

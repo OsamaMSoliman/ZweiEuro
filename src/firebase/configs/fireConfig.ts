@@ -1,6 +1,6 @@
 import { FirebaseOptions } from "firebase/app";
 
-export const firebaseConfig = Object.freeze({
+export const firebaseConfig = {
     apiKey: import.meta.env.VITE_API_KEY,
     authDomain: import.meta.env.VITE_AUTH_DOMAIN,
     databaseURL: import.meta.env.VITE_DATABASE_URL,
@@ -9,4 +9,4 @@ export const firebaseConfig = Object.freeze({
     messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
     appId: import.meta.env.VITE_APP_ID,
     measurementId: import.meta.env.VITE_MEASUREMENT_ID,
-} as FirebaseOptions);
+} as const satisfies FirebaseOptions;
