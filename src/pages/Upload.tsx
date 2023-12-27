@@ -47,7 +47,7 @@ export default function Upload() {
             year: Number(formData.get("year")),
             collection: isNotDeCoin ?
                 {
-                    "#": Number(formData.get("count"))
+                    Z: Number(formData.get("count"))
                 } : {
                     A: Number(formData.get("A")),
                     D: Number(formData.get("D")),
