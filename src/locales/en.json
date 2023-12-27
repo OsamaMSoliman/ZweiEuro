@@ -19,7 +19,8 @@
         "home-link": "Home",
         "table-link": "Table",
         "upload-link": "Upload",
-        "sign-in-label": "Signed in as"
+        "sign-in-label": "Signed in as",
+        "grid-link": "Cards"
     },
     "table-view": {
         "id": "ID",
@@ -29,5 +30,8 @@
         "collection": "Collection",
         "category": "Category",
         "modifiedBy": "Modified By"
+    },
+    "coin-card":{
+        "modified-by":"last edited by"
     }
 }
