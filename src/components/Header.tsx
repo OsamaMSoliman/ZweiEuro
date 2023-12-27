@@ -1,14 +1,9 @@
-import { TPath } from "../interfaces/Paths";
-import { Link as ReactLink, LinkProps } from "react-router-dom";
-import { Button, Container, Image, Nav, NavItem, Navbar } from "react-bootstrap";
+import { Button, Container, Image, Nav, Navbar } from "react-bootstrap";
 import { useUser } from "reactfire";
 import { Logout } from "../firebase/utils/fireLogout";
 import { useTranslation } from "react-i18next";
 import logo from "../assets/logo.jpg";
-
-const Link: React.FC<LinkProps & { to: TPath }> = ({ to, className = "nav-link", ...rest }) => (
-    <NavItem><ReactLink className={className} to={to} {...rest} /></NavItem>
-);
+import Link from "./Link";
 
 export default function () {
     const { data: user } = useUser();
