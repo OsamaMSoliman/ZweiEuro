@@ -47,11 +47,9 @@ export default function TableView() {
                         <td>{coin.title}</td>
                         <td>{coin.description}</td>
                         <td>{coin.year}</td>
-                        {"number" === typeof coin.collection ?
-                            <td colSpan={5}>{coin.collection}</td>
-                            :
-                            Object.values(coin.collection).map((value, idx) => (
-                                <td key={idx}>{value}</td>
+                        {
+                            Object.values(coin.collection).map((value, idx, collection) => (
+                                <td key={idx} colSpan={collection.length === 1 ? 5 : 1}>{value}</td>
                             ))
                         }
                         <td>{CoinCategorys[coin.category]}</td>

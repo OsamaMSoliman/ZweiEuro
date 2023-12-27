@@ -1,22 +1,19 @@
 import { CardGroup } from "react-bootstrap";
-import { CoinCollectionType, CoinLetterType } from "../interfaces";
 import { LetterCard } from "./LetterCard";
+import { TCollection } from "../interfaces";
 
-interface ILettersTableProps {
+interface ILettersCardGroupProps {
     id: string;
-    collection: CoinCollectionType;
+    collection: TCollection;
+    isStatic?: boolean;
 }
 
-export default function LettersCardGroup({ id, collection }: ILettersTableProps) {
-    return (
-        <CardGroup>
-            {"number" === typeof collection ?
-                <LetterCard coinId={id!} letter={"#"} count={collection} />
-                :
-                Object.entries(collection).map(([key, value]) => (
-                    <LetterCard key={key} coinId={id!} letter={key as CoinLetterType} count={value} />
-                ))
-            }
-        </CardGroup>
-    );
-}
+export const LettersCardGroup = ({ id, collection, isStatic=false }: ILettersCardGroupProps) => (
+    <CardGroup>
+        {
+            Object.entries(collection).map(([key, value]) => (
+                <LetterCard key={key} coinId={id} letter={key} count={value} isStatic={isStatic} />
+            ))
+        }
+    </CardGroup>
+);
