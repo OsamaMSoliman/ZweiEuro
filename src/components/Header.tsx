@@ -1,9 +1,14 @@
-import { Button, Container, Image, Nav, Navbar } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { TPath } from "../interfaces/Paths";
+import { Link as ReactLink, LinkProps } from "react-router-dom";
+import { Button, Container, Image, Nav, NavItem, Navbar } from "react-bootstrap";
 import { useUser } from "reactfire";
 import { Logout } from "../firebase/utils/fireLogout";
 import { useTranslation } from "react-i18next";
 import logo from "../assets/logo.jpg";
+
+const Link: React.FC<LinkProps & { to: TPath }> = ({ to, className = "nav-link", ...rest }) => (
+    <NavItem><ReactLink className={className} to={to} {...rest} /></NavItem>
+);
 
 export default function () {
     const { data: user } = useUser();
@@ -23,18 +28,10 @@ export default function () {
                     <Navbar.Toggle />
                     <Navbar.Collapse>
                         <Nav variant="underline" defaultActiveKey="/">
-                            <Nav.Item>
-                                <Link className="nav-link" to="/">{t("app-nav-bar.home-link")}</Link>
-                            </Nav.Item>
-                            <Nav.Item>
-                                <Link className="nav-link" to="/table">{t("app-nav-bar.table-link")}</Link>
-                            </Nav.Item>
-                            <Nav.Item>
-                                <Link className="nav-link" to="/grid">{t("app-nav-bar.grid-link")}</Link>
-                            </Nav.Item>
-                            <Nav.Item>
-                                <Link className="nav-link" to="/upload">{t("app-nav-bar.upload-link")}</Link>
-                            </Nav.Item>
+                            <Link to="/">{t("app-nav-bar.home-link")}</Link>
+                            <Link to="/table">{t("app-nav-bar.table-link")}</Link>
+                            <Link to="/grid">{t("app-nav-bar.grid-link")}</Link>
+                            <Link to="/upload">{t("app-nav-bar.upload-link")}</Link>
                         </Nav>
                     </Navbar.Collapse>
                     <Navbar.Collapse className="justify-content-end">
