@@ -4,6 +4,7 @@ import { CoinCategorys, ICoinData } from '../interfaces';
 import { Navigate } from 'react-router-dom';
 import { Table } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
+import { HeaderHeight } from '../components/Header';
 
 export default function TableView() {
     const [t] = useTranslation();
@@ -22,7 +23,7 @@ export default function TableView() {
 
     return (
         <Table bordered className='text-center'>
-            <thead>
+            <thead className='sticky-top' style={{ top: HeaderHeight }}>
                 <tr>
                     <th rowSpan={2} className='align-middle'>{t("table-view.id")}</th>
                     <th rowSpan={2} className='align-middle'>{t("table-view.title")}</th>

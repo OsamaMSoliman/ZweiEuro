@@ -5,12 +5,14 @@ import { useTranslation } from "react-i18next";
 import logo from "../assets/logo.jpg";
 import Link from "./Link";
 
+export const HeaderHeight = 76 as const;
+
 export default function () {
     const { data: user } = useUser();
     const [t] = useTranslation();
 
     return (
-        <Navbar expand="lg" className="bg-body-tertiary" sticky="top">
+        <Navbar expand="lg" className="bg-body-tertiary" sticky="top" style={{ height: HeaderHeight }}>
             <Container fluid>
                 <Navbar.Brand>
                     <Link to="/">

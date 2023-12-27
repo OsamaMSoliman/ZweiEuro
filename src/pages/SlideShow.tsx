@@ -29,6 +29,14 @@ export default function SlideShow() {
   const { state } = useLocation();
 
   return (
+    //  solution 1
+    // <div style={{ height: `calc(100vh - ${HeaderHeight}px)` }}>
+    // <img src={logo} alt="image here" className='object-fit-fill h-100 w-100' />
+    // </div>
+
+    // solution 2
+    // <img src={logo} alt="image here" className='object-fit-fill h-100 w-100 ' />
+
     <Carousel activeIndex={state?.idx} controls={!state} pause="hover" slide={false}>
       {coins.map(([key, coinData]) => (
         <CarouselItem key={key}>
@@ -38,6 +46,3 @@ export default function SlideShow() {
     </Carousel>
   );
 }
-
-
-
