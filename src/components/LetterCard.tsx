@@ -8,9 +8,10 @@ interface ILetterCard {
     coinId: string;
     letter: string;
     count: number;
+    isStatic?: boolean;
 }
 
-export const LetterCard = ({ coinId, letter, count }: ILetterCard) => {
+export const LetterCard = ({ coinId, letter, count, isStatic=false }: ILetterCard) => {
     const [open, setOpen] = useState(false);
 
     const onClick = () => setOpen(!open);
@@ -29,7 +30,7 @@ export const LetterCard = ({ coinId, letter, count }: ILetterCard) => {
             <Card.Body onClick={onClick} className='d-flex flex-column justify-content-center'>
                 {count}
             </Card.Body>
-            <Collapse in={open}>
+            <Collapse in={open && !isStatic}>
                 <Card.Footer className="text-muted">
                     <ButtonGroup className='w-100'>
                         <Button variant="outline-primary" onClick={increment}> + </Button>
