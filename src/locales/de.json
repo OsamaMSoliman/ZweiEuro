@@ -19,7 +19,8 @@
         "home-link": "Startseite",
         "table-link": "Tabelle",
         "upload-link": "Hochladen",
-        "sign-in-label": "Angemeldet als"
+        "sign-in-label": "Angemeldet als",
+        "grid-link": "Karten"
     },
     "table-view": {
         "id": "ID",
@@ -29,5 +30,8 @@
         "collection": "Sammlung",
         "category": "Kategorie",
         "modifiedBy": "geändert von"
+    },
+    "coin-card":{
+        "modified-by":"zuletzt geändert von"
     }
 }
