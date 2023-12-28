@@ -6,7 +6,9 @@ import { getImgStorageRef } from '../firebase/utils/fireStorage';
 import { LettersCardGroup } from './LettersCardGroup';
 import Link from './Link';
 
-export default function CoinCard({ id, title, description, year, collection, category, modifiedBy }: ICoinData) {
+type TCoinCardProps = ICoinData & { idx: number };
+
+export default function CoinCard({ idx, id, title, description, year, collection, category, modifiedBy }: TCoinCardProps) {
     const { data: img_uri } = useStorageDownloadURL(getImgStorageRef(useStorage(), id!));
 
     const [t] = useTranslation();
@@ -19,7 +21,7 @@ export default function CoinCard({ id, title, description, year, collection, cat
                 <Card.Subtitle className="mb-2 text-muted">{CoinCategorys[category]}</Card.Subtitle>
                 <Card.Text>{description}</Card.Text>
                 <LettersCardGroup id={id!} collection={collection} isStatic />
-                <Link to="/" className='stretched-link' state={{ id }} />
+                <Link to="/" className='stretched-link' state={{ idx }} />
             </Card.Body>
             <Card.Footer className="text-muted"><small>{t("coin-card.modified-by")}</small> : {modifiedBy}</Card.Footer>
         </Card>

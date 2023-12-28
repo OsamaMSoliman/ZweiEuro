@@ -5,7 +5,6 @@ import { getBaseDBUploadRef } from '../firebase/utils/fireRealTimeDatabase';
 import { SlideSheet } from '../components/SlideSheet';
 import { ICoinData } from '../interfaces';
 import { Navigate, useLocation } from 'react-router-dom';
-import { useEffect, useState } from 'react';
 
 export default function SlideShow() {
   const baseUploadRef = getBaseDBUploadRef(useDatabase());
@@ -27,22 +26,10 @@ export default function SlideShow() {
   if (status !== "loading" && coins.length === 0)
     return <Navigate to={"/upload"} replace={true} />
 
-
-  const [index, setIndex] = useState(0);
-
-  const handleSelect = (selectedIndex: number) => {
-    setIndex(selectedIndex);
-  };
   const { state } = useLocation();
-  useEffect(() => {
-    console.log(state);
-
-    if (state)
-      setIndex(coins.findIndex(item => item[0] === state.id))
-  }, [state])
 
   return (
-    <Carousel activeIndex={index} onSelect={handleSelect} pause="hover">
+    <Carousel activeIndex={state?.idx} controls={!state} pause="hover" slide={false}>
       {coins.map(([key, coinData]) => (
         <CarouselItem key={key}>
           <SlideSheet {...coinData} />
