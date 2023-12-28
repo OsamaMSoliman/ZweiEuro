@@ -21,7 +21,7 @@ export default function CoinCard({ id, title, description, year, collection, cat
                 <LettersCardGroup id={id!} collection={collection} isStatic />
                 <Link to="/" className='stretched-link' state={{ id }} />
             </Card.Body>
-            <Card.Footer className="text-muted">{t("coin-card.modified-by")} : {modifiedBy}</Card.Footer>
+            <Card.Footer className="text-muted"><small>{t("coin-card.modified-by")}</small> : {modifiedBy}</Card.Footer>
         </Card>
     );
 }
