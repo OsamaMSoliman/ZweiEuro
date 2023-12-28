@@ -13,17 +13,17 @@ const BreakPoints = [
 type TBreakPoint = typeof BreakPoints[number][0];
 
 export default function () {
-    const [screenWidth, setScreenWidth] = useState<TBreakPoint>("xxl");
+    const [breakPoint, setBreakPoint] = useState<TBreakPoint>("xxl");
 
     useEffect(() => {
         const handleWindowSizeChange = () => {
             for (const [key, start, end] of BreakPoints)
                 if (start <= window.innerWidth && window.innerWidth < end)
-                    setScreenWidth(key);
+                    setBreakPoint(key);
         }
         window.addEventListener('resize', handleWindowSizeChange);
         return () => window.removeEventListener('resize', handleWindowSizeChange);
     }, []);
 
-    return screenWidth;
+    return breakPoint;
 }
