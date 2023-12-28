@@ -4,7 +4,7 @@ export type TCollection = {
     F: number;
     G: number;
     J: number;
-} | { Z: number };
+} | { X: number };
 
 export interface ICoinData {
     id?: string; // set at the time of uploading (note this is the same as image id)
