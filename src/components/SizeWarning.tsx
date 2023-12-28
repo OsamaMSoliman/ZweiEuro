@@ -1,11 +1,13 @@
 import { Modal } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import useWarningOnPath, { TBPUpperLimit } from '../hooks/useWarningOnPath';
+import { TPath } from '../interfaces/Paths';
 
-// TODO: type path is TPath NOT string
-const PathBPLowerLimit: { [path: string]: TBPUpperLimit } = {
+const PathBPLowerLimit: Partial<Record<TPath, TBPUpperLimit>> = {
     "/": "sm",
     "/table": "sm",
+    // "/grid": "xs", // TODO: make default
+    // "/upload":"xs", // TODO: make default
 };
 
 export default function SizeWarning() {

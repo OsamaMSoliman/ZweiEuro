@@ -1,3 +1,4 @@
+import { TPath, isTPath } from "../interfaces/Paths";
 import useViewportWidth from "./useViewportWidth";
 import { useLocation } from "react-router-dom";
 
@@ -8,14 +9,16 @@ const BreakPointUpperLimit = {
     md: 992,
     lg: 1200,
     xl: 1400,
-    xxl: Infinity
+    xxl: Infinity,
 } as const;
 
 export type TBPUpperLimit = keyof typeof BreakPointUpperLimit;
 
-// TODO: type path is TPath NOT string
-export default function (PathBPLowerLimit: { [path: string]: TBPUpperLimit }) {
+export type TPathToBP = Partial<Record<TPath, TBPUpperLimit>>;
+
+export default function useWarningOnPath(PathBPLowerLimit: TPathToBP): boolean {
     const vpWidth = useViewportWidth();
     const { pathname } = useLocation();
-    return vpWidth <= BreakPointUpperLimit[PathBPLowerLimit[pathname]];
+    // By default xs is when the warning should start, regardless of the path!
+    return isTPath(pathname) ? vpWidth <= BreakPointUpperLimit[PathBPLowerLimit[pathname] ?? "xs"] : false;
 }

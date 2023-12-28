@@ -10,23 +10,23 @@ export default function () {
             breakpoints={['xxl', 'xl', 'lg', 'md', 'sm']}
             minBreakpoint="sm"
         >
-        //  solution 1
+            {/* //  solution 1 */}
             <>
                 <Header />
                 <Outlet />
                 <Footer />
             </>
 
-        // //  solution 2
-        // <div className="d-flex flex-column vh-100">
-        //     <Header />
-        //     <main className="flex-grow-1 overflow-hidden" >
-        //         <Outlet />
-        //     </main>
-        //     <Footer />
-        // </div>
-
             <SizeWarning />
         </ThemeProvider>
     );
 }
+
+// //  solution 2
+// <div className="d-flex flex-column vh-100">
+//     <Header />
+//     <main className="flex-grow-1 overflow-hidden" >
+//         <Outlet />
+//     </main>
+//     <Footer />
+// </div> 
