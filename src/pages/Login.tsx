@@ -1,5 +1,5 @@
 import StyledFirebaseAuth from "../firebase/components/StyledFirebaseAuth";
-import { EmailAuthProvider, GoogleAuthProvider, getAuth } from "firebase/auth";
+import { GoogleAuthProvider, getAuth } from "firebase/auth";
 import { useEffect } from "react";
 import { Container } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -23,17 +23,17 @@ export default function Login() {
     const uiConfig: firebaseui.auth.Config = {
         signInFlow: "popup",
         signInOptions: [
-            {
-                provider: EmailAuthProvider.PROVIDER_ID,
-                requireDisplayName: false,
-                signInMethod: EmailAuthProvider.EMAIL_LINK_SIGN_IN_METHOD,
-            },
+            // {
+            //     provider: EmailAuthProvider.PROVIDER_ID,
+            //     requireDisplayName: false,
+            //     signInMethod: EmailAuthProvider.EMAIL_LINK_SIGN_IN_METHOD,
+            // },
             GoogleAuthProvider.PROVIDER_ID,
         ],
     };
 
     return (
-        <Container className="d-flex flex-column justify-content-center h-100">
+        <Container className="d-flex flex-column justify-content-center h-100 my-5 py-5">
             <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={getAuth()} />
         </Container>
     );

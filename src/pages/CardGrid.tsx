@@ -23,7 +23,7 @@ export default function CardGrid() {
 
     return (
         <Container >
-            <Row sm={1} md={2} lg={4} className='g-3'>
+            <Row className='gap-3'>
                 {coins.map(([key, value], index) => (
                     <Col key={key} className='d-flex justify-content-center'>
                         <CoinCard idx={index} {...value} />
