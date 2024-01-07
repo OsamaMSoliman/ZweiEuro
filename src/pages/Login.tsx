@@ -23,11 +23,6 @@ export default function Login() {
     const uiConfig: firebaseui.auth.Config = {
         signInFlow: "popup",
         signInOptions: [
-            // {
-            //     provider: EmailAuthProvider.PROVIDER_ID,
-            //     requireDisplayName: false,
-            //     signInMethod: EmailAuthProvider.EMAIL_LINK_SIGN_IN_METHOD,
-            // },
             GoogleAuthProvider.PROVIDER_ID,
         ],
     };

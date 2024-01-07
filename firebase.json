@@ -24,6 +24,7 @@
     "rules": "rules/database.rules"
   },
   "hosting": {
+    "site": "zwei-euro",
     "public": "dist",
     "ignore": [
       "firebase.json",
@@ -43,8 +44,8 @@
           {
             "key": "Cross-Origin-Opener-Policy",
             "value": "same-origin"
-          }
-          ,{
+          },
+          {
             "key": "Access-Control-Allow-Origin",
             "value": "*"
           }
