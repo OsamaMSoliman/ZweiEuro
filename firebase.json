@@ -24,7 +24,7 @@
     "rules": "rules/database.rules"
   },
   "hosting": {
-    "site": "zwei-euro",
+    "site": "euro2",
     "public": "dist",
     "ignore": [
       "firebase.json",

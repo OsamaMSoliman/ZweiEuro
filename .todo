@@ -1,0 +1,23 @@
+<!-- AppCheck -->
+<!-- take AppCheck into it's own branch !!! -->
+<!-- change folder names to coinsDB and coinImgs -->
+<!-- check Cross-Origin-Opener-Policy -->
+<!-- clicking on the logo goes to the home page -->
+<!-- categories: state, VIP, history -->
+<!-- title of coin -->
+<!-- table view page -->
+<!-- a card layout -->
+<!-- cards grid view -->
+<!-- image should keep its ratio -->
+<!-- table fit-viewport-width -->
+<!-- AppBar response ! -->
+
+extract Path and BreakPoint stuff
+Preview channels on merge PR
+
+
+ascending order by year then title
+Logo in the fav icon
+sign in as is only shown when actually signed in
+show and sort by category
+list coin of ids, and access the coin I need inside the component not in the parent ???
