@@ -1,5 +1,15 @@
 {
   "projects": {
-    "default": "zweieuro-unique-id"
-  }
+    "default": "zwei-euro"
+  },
+  "targets": {
+    "zwei-euro": {
+      "hosting": {
+        "euro2": [
+          "dist/"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }

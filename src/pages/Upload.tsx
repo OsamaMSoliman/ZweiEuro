@@ -90,7 +90,7 @@ export default function Upload() {
                         });
                 }}
             >
-                <Row md={2} xs={1} className="h-100 g-2">
+                <Row md={2} sm={1} className="h-100 g-2">
                     <Col className="d-flex flex-column justify-content-center align-items-center">
                         <input
                             className="d-none"

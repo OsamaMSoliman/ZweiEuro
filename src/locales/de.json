@@ -31,7 +31,12 @@
         "category": "Kategorie",
         "modifiedBy": "geändert von"
     },
-    "coin-card":{
-        "modified-by":"zuletzt geändert von"
+    "coin-card": {
+        "modified-by": "zuletzt geändert von"
+    },
+    "size-warning": {
+        "title": "Achtung!",
+        "body": "Diese Seite funktioniert nicht gut auf dieser Bildschirmgröße!",
+        "footer": "Bitte verwenden Sie ein anderes Gerät (oder Telefon im Querformat)!"
     }
 }

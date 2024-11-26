@@ -31,7 +31,12 @@
         "category": "Category",
         "modifiedBy": "Modified By"
     },
-    "coin-card":{
-        "modified-by":"last edited by"
+    "coin-card": {
+        "modified-by": "last edited by"
+    },
+    "size-warning": {
+        "title": "Warning!",
+        "body": "This page doesn't work well on this screen size!",
+        "footer": "Please use another device or use your Phone in Landscape!"
     }
 }

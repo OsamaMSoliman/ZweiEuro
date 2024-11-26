@@ -12,7 +12,7 @@ export default function () {
     const [t] = useTranslation();
 
     return (
-        <Navbar expand="lg" className="bg-body-tertiary" sticky="top" style={{ height: HeaderHeight }}>
+        <Navbar expand="md" className="bg-body-tertiary mb-3" sticky="top" style={{ height: HeaderHeight }}>
             <Container fluid>
                 <Navbar.Brand>
                     <Link to="/">
